@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<style>
+    .custom-cards{
+        max-width: 600px;
+        width: 100%;
+        margin: 20px auto;
+    }
+</style>
+<body>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/views/layouts/navbar.html'; ?>
+
+<h3 class="text-center mt-3">We have a lot of films for you!</h3>
+<h5 class="text-center">What film you want to see today?</h5>
+
+<?php if ($data!=null) {foreach ($data as $film) { ?>
+    <div class="card custom-cards">
+        <div class="card-header text-center font-weight-bold">
+             <?= $film->Name ?>
+        </div>
+        <div class="card-body">
+            <p class="card-text"><span class="font-weight-bold">Year:</span> <?= $film->Year ?></p>
+            <p class="card-text"><span class="font-weight-bold">Stars:</span> Audrey Hepburn, Cary Grant, Walter Matthau, James Coburn, George Kennedy</p>
+            <a href="/films/<?= $film->id_film ?>" class="btn btn-primary">More info</a>
+        </div>
+    </div>
+<?php } } else { ?>
+    <h3 class="text-center mt-3">Sorry, no films! :(</h3>
+<?php } ?>
+</body>
+</html>
