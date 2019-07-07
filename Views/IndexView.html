@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Films</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -19,20 +19,32 @@
 </style>
 <body>
 <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/views/layouts/navbar.html'; ?>
-
+<a class="btn btn-primary" href="Add">Add New film</a>
+<form class="form-inline" action="searchbyfilmname" method="post">
+    <i class="fas fa-search" aria-hidden="true"></i>
+    <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search by film names"
+      aria-label="Search" name="keyword">
+  </form>
+  <form class="form-inline" action="searchbyactorname" method="post">
+    <i class="fas fa-search" aria-hidden="true"></i>
+    <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search by actor names"
+      aria-label="Search" name="keyword">
+  </form>
 <h3 class="text-center mt-3">We have a lot of films for you!</h3>
 <h5 class="text-center">What film you want to see today?</h5>
 
 <?php if ($data!=null) {foreach ($data as $film) { ?>
     <div class="card custom-cards">
         <div class="card-header text-center font-weight-bold">
-             <?= $film->Name ?>
+            <a href="/films/<?= $film->FilmId ?>" class="btn btn-primary"> <?= $film->Name ?></a>
         </div>
         <div class="card-body">
             <p class="card-text"><span class="font-weight-bold">Year:</span> <?= $film->Year ?></p>
-            <p class="card-text"><span class="font-weight-bold">Stars:</span> Audrey Hepburn, Cary Grant, Walter Matthau, James Coburn, George Kennedy</p>
-            <a href="/films/<?= $film->id_film ?>" class="btn btn-primary">More info</a>
+            <p class="card-text"><span class="font-weight-bold">Stars:</span> 
+                <?= $film->Actors ?>
+            </p>
         </div>
+        <a class="btn btn-danger" href="Delete/<?= $film->FilmId ?>">Delete</a>
     </div>
 <?php } } else { ?>
     <h3 class="text-center mt-3">Sorry, no films! :(</h3>
